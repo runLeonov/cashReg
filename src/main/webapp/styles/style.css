@@ -1,0 +1,89 @@
+.btn {
+    display: inline-block;
+    background: #8C959D; /* Серый цвет фона */
+    color: #fff; /* Белый цвет текста */
+    padding: 1rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    border-radius: 3px; /* Скругляем уголки */
+    font-size: 18px;
+
+}
+
+.header {
+    backface-visibility: hidden;
+    background: rgba(255, 255, 255, .8);
+}
+
+.header > li {
+    display: inline-block;
+    position: relative;
+}
+
+.log_form {
+    align-content: center;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+
+    background: #bd4a5b;
+    text-align: center;
+    font-size: 23px;
+    padding: 20px;
+    width: 400px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.mainContainer {
+    background-color: #cae6e4;
+}
+.formToCreate {
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+
+.table-border, .table-border td, .table-border th {
+    border: 2px double black;
+    cellspacing: 3px;
+}
+.createCheck {
+    padding: 20%;
+    align-content: center;
+    margin: 0 auto;
+
+    background: #bd4a5b;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+
+
+
+    text-align: center;
+    border: 1px solid black;
+    display: inline-flex;
+    width: 30%;
+}
+.prodslist {
+    position: fixed;
+    right: 5px;
+    top: 80px;
+    margin-right: 8%;
+    font-size: 20vh;
+}
+.col {
+    width: 60px;
+}
+body {
+    padding-left:  50px;
+    padding-right:   50px;
+    background-color: #cae6e4;
+}
+
+
+
+.counter_in_check {
+    display: inline-grid;
+    float: right;
+    margin-top: 20px;
+}
