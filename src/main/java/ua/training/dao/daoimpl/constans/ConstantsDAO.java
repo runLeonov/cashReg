@@ -42,6 +42,8 @@ public final class ConstantsDAO {
             "SELECT products.Id FROM products WHERE products.Id = (?)";
     public static final String UPDATE_PRODS_IN_STORE_WEIGHT_BY_ID = "UPDATE prod_in_store SET Weight = ? WHERE Id = ?";
     public static final String DELETE_PRODS_IN_STORE_BY_ID = "DELETE FROM prod_in_store WHERE Id = ?";
+    public static final String SELECT_WEIGHT_PRODS_IN_STORE_BY_ID = "SELECT Weight FROM prod_in_store WHERE Id = ?";
+    public static final String UPDATE_WEIGHT_BY_ID = "UPDATE prod_in_store SET Weight = ? WHERE Id = ?";
 
     public static final String SELECT_ALL_USERS = "SELECT * FROM users " + "WHERE Id = ?";
     public static final String INSERT_INTO_USERS = "INSERT INTO users (Name, Password, Email, UserRoleId) " +

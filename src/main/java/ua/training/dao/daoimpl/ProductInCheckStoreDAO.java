@@ -71,7 +71,7 @@ public class ProductInCheckStoreDAO implements IProductInCheckDAO {
     public boolean isEnough(Double weight, Integer id) {
         try (Connection connection = ConnectorToDB.getInstance().connect();
              PreparedStatement statement = connection.prepareStatement(
-                     "SELECT Weight FROM prod_in_store WHERE Id = ?")) {
+                     ConstantsDAO.SELECT_WEIGHT_PRODS_IN_STORE_BY_ID)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.first()) {
@@ -88,9 +88,9 @@ public class ProductInCheckStoreDAO implements IProductInCheckDAO {
     public boolean decrementWeight(Double weight, Integer id) {
         try (Connection connection = ConnectorToDB.getInstance().connect();
              PreparedStatement statement = connection.prepareStatement(
-                     "SELECT Weight FROM prod_in_store WHERE Id = ?");
+                     ConstantsDAO.SELECT_WEIGHT_PRODS_IN_STORE_BY_ID);
              PreparedStatement statement2 = connection.prepareStatement(
-                     "UPDATE prod_in_store SET Weight = ? WHERE Id = ?")) {
+                     ConstantsDAO.UPDATE_WEIGHT_BY_ID)) {
             statement.setInt(1, id);
             ResultSet set = statement.executeQuery();
             if (set.first()) {

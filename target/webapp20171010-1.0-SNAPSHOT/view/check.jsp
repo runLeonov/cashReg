@@ -29,8 +29,8 @@
         <fmt:message key="check.form.write.weight"/>:
         <input type="number" min="0" step="0.1" name="weight"> <br>
         <input type="submit" size="123" name="btnAddToCheck" value=<fmt:message key="check.from.button.add"/>> <br>
-        <input type="submit" size="123" name="btnCreateCheck" value=<fmt:message key="check.from.button.create"/> <br>
-        <input type="submit" size="123" name="clearCheck" value=<fmt:message key="check.from.button.delete"/>>
+        <input type="submit" size="123" name="btnCreateCheck" value=<fmt:message key="check.from.button.create"/>> <br>
+        <input type="submit" size="123" name="clearCheck" value=<fmt:message key="check.from.button.delete"/>> <br>
         <c:if test="${not empty checkCreated}"><fmt:message key="check.created"/> <br></c:if>
     </form>
 </div>
