@@ -16,7 +16,7 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.17" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
-          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/javax/servlet/jstl/1.2/jstl-1.2.jar" output-file-name="javax.servlet-jstl-1.2.jar" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: net.sf.jasperreports:jasperreports:6.2.0" />
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.9.0" />
@@ -56,6 +56,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:2.0.8" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:2.0.8" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:2.0.8" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/jstl/jstl/1.2/jstl-1.2.jar" output-file-name="jstl-jstl-1.2.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">

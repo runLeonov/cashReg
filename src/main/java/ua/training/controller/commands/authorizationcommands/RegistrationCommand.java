@@ -15,21 +15,20 @@ public class RegistrationCommand implements Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         UserService service = ServiceFactory.getInstance().getUserService();
+        User user = service.registration(
+                req.getParameter("name"),
+                req.getParameter("email"),
+                req.getParameter("password")
+        );
 
-        String userName = req.getParameter("name");
-        String password = req.getParameter("password");
-        String email = req.getParameter("email");
-
-        User user = service.registration(userName, email, password);
-
-        if (user != null) {
+        if (user != null && user.getName() != null) {
             req.getSession().setAttribute("user", user);
             logger.info("Зареєстрований новий користувач: " + req.getParameter("name"));
             return "login";
         } else {
             logger.info("Користувач під таким емейлом вже існує");
             req.setAttribute("existsLogin", req.getParameter("email"));
-            return null;
+            return "registration";
         }
     }
 }

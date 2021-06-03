@@ -52,7 +52,8 @@ public class CommandHelper {
                     return commands.getCommand(SHOW_CHECK_LAST);
                 } else if (req.getParameter("btnDeleteLastCheck") != null) {
                     return commands.getCommand(DELETE_CHECK_LAST);
-                } else if (req.getParameter("btnCreateXReport") != null) {
+                } else if (req.getParameter("btnCreateXReport") != null
+                        || req.getParameter("btnCreateZReport") != null) {
                     return commands.getCommand(CREATE_REPORT);
                 }
             default:

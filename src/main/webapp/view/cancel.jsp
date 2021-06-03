@@ -5,6 +5,7 @@
 <c:if test="${not empty param.language}">
     <c:set var="language" value="${param.language}" scope="session"/>
 </c:if>
+
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="lang"/>
 <html>
@@ -42,7 +43,7 @@
     <form method="post" class="formToCreate">
         <h4> <fmt:message key="cancel.check.create_reports"/> </h4>
         <input type="submit" size="123" name="btnCreateXReport" value=<fmt:message key="cancel.check.btn.create_x"/>> <br><br>
-        <input type="submit" size="123" name="btnCreateXReport" value=<fmt:message key="cancel.check.btn.create_z"/>> <br>
+        <input type="submit" size="123" name="btnCreateZReport" value=<fmt:message key="cancel.check.btn.create_z"/>> <br>
     </form>
 </div>
 <div class="prodslist">

@@ -10,20 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(
-        urlPatterns = {"/login", "/check", "/products", "/cancel", "/logout", "/registration", "/report"}
+        urlPatterns = {"/error", "/login", "/check", "/products", "/cancel", "/logout", "/registration", "/report"}
 )
 public class MainController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         processRequest(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         processRequest(req, resp);
+
+
     }
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp)
@@ -34,7 +36,6 @@ public class MainController extends HttpServlet {
         }  else if (req.getSession().getAttribute("language") == null) {
             req.getSession().setAttribute("language", "en");
         }
-
         Command command = CommandHelper.getCommand(req);
         String path = null;
         if (command != null) {

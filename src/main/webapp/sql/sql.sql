@@ -74,6 +74,5 @@ CREATE TABLE mycheck_and_prods
     ProductId INT,
     Weight    DOUBLE,
     Price     DOUBLE DEFAULT 0,
-#     FOREIGN KEY (ProductId) REFERENCES prod_in_store (Id),
     FOREIGN KEY (CheckId) REFERENCES mycheck (Id)
 );

@@ -12,6 +12,14 @@ public class ReportGeneratorService {
     private CheckDAO checkDAO = DAOFactory.getInstance().getCheckDAO();
 
     public Report createAndGetX() {
+        return createRep();
+    }
+
+    public Report createAndGetZ() {
+        return createRep();
+    }
+
+    private Report createRep() {
         Integer countOfChecks = checkDAO.getCountOfChecks();
         Integer deletedChecks = checkDAO.getCountOfDeletedChecks();
         Double totalA = checkWithProductsDAO.getTotalSum();
@@ -24,14 +32,17 @@ public class ReportGeneratorService {
         Double totalNds = ndsA + ndsB + ndsC;
         return new Report(
                 new Timestamp(System.currentTimeMillis()),
-                countOfChecks, deletedChecks,
-                totalA, totalB, totalC, totalSum,
-                ndsA, ndsB, ndsC, totalNds
+                countOfChecks,
+                deletedChecks,
+                totalA,
+                totalB,
+                totalC,
+                totalSum,
+                ndsA,
+                ndsB,
+                ndsC,
+                totalNds
         );
-    }
-
-    public Report createAndGetZ() {
-        return null;
     }
 
 }

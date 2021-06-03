@@ -31,7 +31,7 @@ public class LoginCommand implements Command {
             req.setAttribute("userNotExists", true);
             logger.info("Користувача не знайдено");
         }
-        return null;
+        return "login";
     }
 
 

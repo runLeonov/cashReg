@@ -11,7 +11,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title></title>
     <style>
         <%@include file="/styles/style.css"%>

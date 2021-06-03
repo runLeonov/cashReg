@@ -36,6 +36,24 @@ public class CheckWithProductsDAO implements ICheckWithProductsDAO {
         return false;
     }
 
+    public boolean insert(Integer id, List<ProductInCheckStore> products) {
+        try (Connection connection = ConnectorToDB.getInstance().connect();
+             PreparedStatement statement = connection.prepareStatement(
+                     ConstantsDAO.INSERT_INTO_CHECK_WITH_PRODS_ID_AND_PRODS)) {
+            for (ProductInCheckStore p : products) {
+                statement.setInt(1, id);
+                statement.setInt(2, p.getId());
+                statement.setDouble(3, p.getWeightOrCount());
+                statement.setDouble(4, p.getTotalPrice());
+                statement.executeUpdate();
+            }
+            return true;
+        } catch (SQLException | NamingException e) {
+            logger.error(e);
+        }
+        return false;
+    }
+
     public boolean incrementDeletedChecks() {
         try (Connection connection = ConnectorToDB.getInstance().connect();
              PreparedStatement statement = connection.prepareStatement(

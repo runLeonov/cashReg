@@ -21,14 +21,15 @@ public class CreateReportCommand implements Command {
             Report report = service.createAndGetX();
             session.setAttribute("reportX", report);
             logger.info("Створення звіту Х");
+            session.setAttribute("reportZ", null);
             return "report";
-        }
-        if (req.getParameter("btnCreateZReport") != null) {
-            Report report = service.createAndGetX();
+        } else if (req.getParameter("btnCreateZReport") != null) {
+            Report report = service.createAndGetZ();
             session.setAttribute("reportZ", report);
             logger.info("Створення звіту Z");
+            session.setAttribute("reportX", null);
             return "report";
         }
-        return null;
+        return "cancel";
     }
 }

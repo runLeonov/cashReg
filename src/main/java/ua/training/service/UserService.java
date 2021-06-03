@@ -67,15 +67,13 @@ public class UserService implements IUserService {
         if (userDAO.findUserByLogin(login) != null) {
             return null;
         }
-
-        User user = new User();
-        user.setName(userName);
-        user.setPassword(password);
-        user.setEmail(login);
-        user.setRoleById(1);
-        user.setIdRole(1);
+        User user = new User(
+                userName,
+                password,
+                login,
+                UserRole.CASHIER,
+                1);
         userDAO.insert(user);
         return user;
-
     }
 }

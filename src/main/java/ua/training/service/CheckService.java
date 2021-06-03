@@ -34,13 +34,8 @@ public class CheckService implements ICheckService {
 
     @Override
     public boolean insert(List<ProductInCheckStore> productList) {
-        boolean f = false;
         checkDAO.insert();
-        Integer id = checkDAO.findLast();
-        for (ProductInCheckStore prod : productList) {
-            f = checkWithProductsDAO.insert(id, prod);
-        }
-        return f;
+        return checkWithProductsDAO.insert(checkDAO.findLast(), productList);
     }
 
     @Override
@@ -55,8 +50,6 @@ public class CheckService implements ICheckService {
         }
         checkDAO.insertToDeleted(checkWithProductsDAO.findById(id));
         checkWithProductsDAO.incrementDeletedChecks();
-        boolean a = checkWithProductsDAO.delete(id);
-        boolean b = checkDAO.delete(id);
-        return a && b;
+        return checkWithProductsDAO.delete(id) && checkDAO.delete(id);
     }
 }

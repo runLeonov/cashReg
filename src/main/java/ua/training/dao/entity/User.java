@@ -14,6 +14,14 @@ public class User extends Model {
         this.role = role;
     }
 
+    public User(String name, String password, String email, UserRole role, int userRoleId) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.userRoleId = userRoleId;
+    }
+
     public User() {
     }
 
@@ -89,6 +97,7 @@ public class User extends Model {
     public int getUserRoleId() {
         return userRoleId;
     }
+
     public UserRole getRoleById(int roleId) {
         if (roleId == 2) {
             return UserRole.SENIOR_CASHIER;
