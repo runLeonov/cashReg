@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "ex" uri = "/WEB-INF/own.tld"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <c:if test="${not empty param.language}">
@@ -12,7 +13,7 @@
     <nav class="headerContainer">
         <ul class="topmenu">
             <c:if test="${not empty sessionScope.user}">
-            <li><a  class="down"><i class="fa fa-angle-down"> </i>${sessionScope.user.name}</a>
+            <li><a class="down"><i class="fa fa-angle-down"> </i>${sessionScope.user.name}</a>
 
                 <c:if test="${sessionScope.user.userRoleId == '3'}">
             <li><a href="products"><i class="fa fa-angle-down"> </i>
@@ -40,13 +41,14 @@
                 </c:if>
 
 
-
             <li><a><fmt:message key="header.button.language"/> <i class="fa fa-angle-down"> </i> </a>
                 <ul class="submenu">
                     <li><a href="?lang=ru">Русский</a></li>
                     <li><a href="?lang=ua">Українська</a></li>
                     <li><a href="?lang=en">English</a></li>
                 </ul>
+            </li>
+            <li> <ex:customDateTag/> <i class="fa fa-angle-down"> </i> </a>
             </li>
         </ul>
     </nav>
