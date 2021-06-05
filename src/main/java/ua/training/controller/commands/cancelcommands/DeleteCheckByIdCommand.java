@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DeleteCheckByIdCommand implements Command {
-    private static Logger logger = Logger.getLogger(DeleteCheckByIdCommand.class);
+    private static final Logger logger = Logger.getLogger(DeleteCheckByIdCommand.class);
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         CheckService service = ServiceFactory.getInstance().getCheckService();

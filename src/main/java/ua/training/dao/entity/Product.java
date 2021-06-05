@@ -4,14 +4,6 @@ public class Product extends Model {
     private String nameOfProd;
     private double price;
 
-    public Product() {
-    }
-
-    public Product(String nameOfProd, double price) {
-        this.nameOfProd = nameOfProd;
-        this.price = price;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,5 +41,33 @@ public class Product extends Model {
                 "nameOfProd='" + nameOfProd + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    public static class Builder {
+        private Product product;
+
+        public Builder() {
+            product = new Product();
+        }
+
+        public Builder withName(String name) {
+            product.nameOfProd = name;
+            return this;
+        }
+
+        public Builder withId(int id) {
+            product.setId(id);
+            return this;
+        }
+
+        public Builder withPrice(double price) {
+            product.price = price;
+            return this;
+        }
+
+        public Product build() {
+            return product;
+        }
+
     }
 }

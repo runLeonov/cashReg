@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 
 public class UserDAO implements IUserDAO {
@@ -45,7 +46,7 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean insert(User user) {
-        if (user != null) {
+        if (Objects.nonNull(user)) {
             try (Connection connection = ConnectorToDB.getInstance().connect();
                  PreparedStatement statement = connection.prepareStatement(
                          ConstantsDAO.INSERT_INTO_USERS)) {
@@ -63,7 +64,7 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public User update(User entity) {
-        if (entity != null) {
+        if (Objects.nonNull(entity)) {
             try (Connection connection = ConnectorToDB.getInstance().connect();
                  PreparedStatement statement = connection.prepareStatement(
                          ConstantsDAO.UPDATE_USERS_BY_ID)) {

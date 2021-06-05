@@ -8,9 +8,10 @@ import ua.training.service.factory.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 public class RegistrationCommand implements Command {
-    private static Logger logger = Logger.getLogger(RegistrationCommand.class);
+    private static final Logger logger = Logger.getLogger(RegistrationCommand.class);
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -21,7 +22,7 @@ public class RegistrationCommand implements Command {
                 req.getParameter("password")
         );
 
-        if (user != null && user.getName() != null) {
+        if (Objects.nonNull(user) && Objects.nonNull(user.getName())) {
             req.getSession().setAttribute("user", user);
             logger.info("Зареєстрований новий користувач: " + req.getParameter("name"));
             return "login";

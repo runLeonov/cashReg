@@ -7,21 +7,6 @@ public class User extends Model {
     private UserRole role;
     private int userRoleId;
 
-    public User(String name, String password, String email, UserRole role) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-    }
-
-    public User(String name, String password, String email, UserRole role, int userRoleId) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-        this.userRoleId = userRoleId;
-    }
-
     public User() {
     }
 
@@ -105,6 +90,43 @@ public class User extends Model {
             return UserRole.COMMODITY_EXPERT;
         } else {
             return UserRole.CASHIER;
+        }
+    }
+
+    public static class Builder {
+        private User user;
+
+        public Builder() {
+            user = new User();
+        }
+
+        public Builder withName(String name) {
+            user.name = name;
+            return this;
+        }
+
+        public Builder withPassword(String password) {
+            user.password = password;
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            user.email = email;
+            return this;
+        }
+
+        public Builder withUserRoleId(int userRoleId) {
+            user.userRoleId = userRoleId;
+            return this;
+        }
+
+        public Builder withUserRole(UserRole role) {
+            user.role = role;
+            return this;
+        }
+
+        public User build() {
+            return user;
         }
     }
 }

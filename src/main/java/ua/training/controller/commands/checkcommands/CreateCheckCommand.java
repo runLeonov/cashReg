@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 public class CreateCheckCommand implements Command {
-    private static Logger logger = Logger.getLogger(ClearCheckCommand.class);
+    private static final Logger logger = Logger.getLogger(ClearCheckCommand.class);
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         CheckService service = ServiceFactory.getInstance().getCheckService();
@@ -21,7 +22,7 @@ public class CreateCheckCommand implements Command {
         List<ProductInCheckStore> productInCheckStores =
                 (List<ProductInCheckStore>) httpSession.getAttribute("productsInCheck");
 
-        if (productInCheckStores != null) {
+        if (  Objects.nonNull(productInCheckStores) && !productInCheckStores.isEmpty()) {
             if (service.insert(productInCheckStores)) {
                 logger.info("Чек створено");
                 req.setAttribute("checkCreated", true);

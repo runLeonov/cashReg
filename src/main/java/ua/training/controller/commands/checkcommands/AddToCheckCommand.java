@@ -13,9 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AddToCheckCommand implements Command {
-    private static Logger logger = Logger.getLogger(AddToCheckCommand.class);
+    private static final Logger logger = Logger.getLogger(AddToCheckCommand.class);
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -25,7 +26,7 @@ public class AddToCheckCommand implements Command {
         @SuppressWarnings("unchecked")
         List<ProductInCheckStore> productInCheckStores =
                 (List<ProductInCheckStore>) httpSession.getAttribute("productsInCheck");
-        if (productInCheckStores == null) {
+        if (Objects.isNull(productInCheckStores)) {
             productInCheckStores = new ArrayList<>();
             httpSession.setAttribute("productsInCheck", productInCheckStores);
         }
@@ -33,7 +34,7 @@ public class AddToCheckCommand implements Command {
         String prodIdStr = req.getParameter("prodId");
         String weightStr = req.getParameter("weight");
         try {
-            Integer prodId = null;
+            Integer prodId = 1;
             if (prodIdStr != "") {
                 prodId = Integer.parseInt(prodIdStr);
             }
@@ -54,9 +55,15 @@ public class AddToCheckCommand implements Command {
                 req.setAttribute("notEnough", true);
                 return null;
             }
-            if (product != null) {
-                productInCheckStores.add(new ProductInCheckStore(product.getId(), product, weight, weight * product.getPrice()));
-                Double sum = productInCheckStores.stream().mapToDouble(x -> x.getTotalPrice()).sum();
+            if (Objects.nonNull(product)) {
+                productInCheckStores.add(
+                        new ProductInCheckStore.Builder()
+                        .withId(product.getId())
+                        .withProduct(product)
+                        .withWeightOrCount(weight)
+                        .withTotalPrice(weight * product.getPrice()).build()
+                );
+                Double sum = productInCheckStores.stream().mapToDouble(ProductInCheckStore::getTotalPrice).sum();
                 httpSession.setAttribute("sumOfProds", sum);
             } else {
                 req.setAttribute("notFound", true);

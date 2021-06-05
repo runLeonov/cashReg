@@ -9,10 +9,11 @@ import ua.training.service.factory.ServiceFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 
 public class LoginCommand implements Command {
-    private static Logger logger = Logger.getLogger(LoginCommand.class);
+    private static final Logger logger = Logger.getLogger(LoginCommand.class);
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -22,7 +23,7 @@ public class LoginCommand implements Command {
         String password = req.getParameter("password");
         User dbUser = service.findUser(email, password);
 
-        if (dbUser != null) {
+        if (Objects.nonNull(dbUser)) {
             session.setAttribute("userNotExists", null);
             session.setAttribute("user", dbUser);
             logger.info("Користувача авторизовано: " + dbUser.getName());

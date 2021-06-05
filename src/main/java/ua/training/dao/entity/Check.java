@@ -6,16 +6,12 @@ import java.util.List;
 public class Check extends Model {
     private List<ProductInCheckStore> products = new ArrayList<>();
 
-    public Check(List<ProductInCheckStore> products) {
-        this.products = products;
+    public List<ProductInCheckStore> getProducts() {
+        return products;
     }
 
-    public Check(Integer id, List<ProductInCheckStore> products) {
-        super(id);
+    public void setProducts(List<ProductInCheckStore> products) {
         this.products = products;
-    }
-
-    public Check() {
     }
 
     @Override
@@ -26,11 +22,26 @@ public class Check extends Model {
                 '}';
     }
 
-    public List<ProductInCheckStore> getProducts() {
-        return products;
-    }
+    public static class Builder {
+        private Check check;
 
-    public void setProducts(List<ProductInCheckStore> products) {
-        this.products = products;
+        public Builder() {
+            check = new Check();
+            check.products = new ArrayList<>();
+        }
+
+        public Builder withProducts(List<ProductInCheckStore> products) {
+            check.products = products;
+            return this;
+        }
+
+        public Builder withId(int id) {
+            check.setId(id);
+            return this;
+        }
+
+        public Check build() {
+            return check;
+        }
     }
 }

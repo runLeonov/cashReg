@@ -3,33 +3,8 @@ package ua.training.dao.entity;
 public class ProductInCheckStore extends Model {
 
     private Product product;
-
     private double weightOrCount;
-
     private double totalPrice;
-
-    public ProductInCheckStore(Product product) {
-        this.product = product;
-    }
-
-    public ProductInCheckStore(int id, Product product, double weightOrCount, double totalPrice) {
-        super(id);
-        this.product = product;
-        this.weightOrCount = weightOrCount;
-        this.totalPrice = totalPrice;
-    }
-
-    public ProductInCheckStore(Product product, double weightOrCount, double totalPrice) {
-        this.product = product;
-        this.weightOrCount = weightOrCount;
-        this.totalPrice = totalPrice;
-    }
-
-    public ProductInCheckStore(Integer idOfProd, Product product, Double weight) {
-        super(idOfProd);
-        this.product = product;
-        this.weightOrCount = weight;
-    }
 
     public Product getProduct() {
         return product;
@@ -67,4 +42,37 @@ public class ProductInCheckStore extends Model {
                 ", totalPrice=" + totalPrice +
                 '}';
     }
+
+    public static class Builder {
+        private ProductInCheckStore productInCheckStore;
+
+        public Builder() {
+            productInCheckStore = new ProductInCheckStore();
+        }
+
+        public Builder withId(int id) {
+            productInCheckStore.setId(id);
+            return this;
+        }
+
+        public Builder withProduct(Product product) {
+            productInCheckStore.product = product;
+            return this;
+        }
+
+        public Builder withWeightOrCount(double weightOrCount) {
+            productInCheckStore.weightOrCount = weightOrCount;
+            return this;
+        }
+
+        public Builder withTotalPrice(double totalPrice) {
+            productInCheckStore.totalPrice = totalPrice;
+            return this;
+        }
+
+        public ProductInCheckStore build() {
+            return productInCheckStore;
+        }
+    }
+
 }

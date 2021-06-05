@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class ShowCheckByIdCommand implements Command {
-    private static Logger logger = Logger.getLogger(ShowCheckByIdCommand.class);
+    private static final Logger logger = Logger.getLogger(ShowCheckByIdCommand.class);
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {

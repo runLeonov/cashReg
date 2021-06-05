@@ -45,7 +45,6 @@ public class UserService implements IUserService {
     @Override
     public User login(String email, String password) {
         return userDAO.findUser(email, password);
-
     }
 
     @Override
@@ -67,12 +66,13 @@ public class UserService implements IUserService {
         if (userDAO.findUserByLogin(login) != null) {
             return null;
         }
-        User user = new User(
-                userName,
-                password,
-                login,
-                UserRole.CASHIER,
-                1);
+        User user = new User.Builder()
+                .withName(userName)
+                .withPassword(password)
+                .withEmail(login)
+                .withUserRole(UserRole.CASHIER)
+                .withUserRoleId(1)
+                .build();
         userDAO.insert(user);
         return user;
     }

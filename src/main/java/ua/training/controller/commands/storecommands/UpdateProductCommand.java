@@ -10,6 +10,7 @@ import ua.training.service.factory.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 public class UpdateProductCommand implements Command {
     private static Logger logger = Logger.getLogger(UpdateProductCommand.class);
@@ -22,6 +23,7 @@ public class UpdateProductCommand implements Command {
         String newPriceStr = req.getParameter("newProdPriceEd");
         String idStr = req.getParameter("idEd");
         String newWeightStr = req.getParameter("newWeightEd");
+
         try {
             if (!newPriceStr.equals("")
                     && !idStr.equals("")
@@ -31,7 +33,7 @@ public class UpdateProductCommand implements Command {
                 Double weight = Double.parseDouble(newWeightStr);
                 Product product = service.updatePrice(price, id);
                 ProductInCheckStore productInCheckStore = checkService.updateWeight(weight, id);
-                if (productInCheckStore == null || product == null) {
+                if (Objects.isNull(productInCheckStore) || Objects.isNull(product)) {
                     logger.info("Продукт не знайдено: " + id);
                     req.setAttribute("notFoundUpdate", true);
                     return null;

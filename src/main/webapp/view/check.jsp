@@ -18,6 +18,7 @@
 </head>
 <body class="mainContainer">
 <jsp:include page="header.jsp" flush="true"/>
+<c:if test="${sessionScope.user.userRoleId == '1' || sessionScope.user.userRoleId == '2'}">
 <div class="createCheck">
     <form method="post" class="formToCreate">
         <c:if test="${not empty wrongInput}"><fmt:message key="check.wronginput"/> <br></c:if>
@@ -82,6 +83,7 @@
         </tr>
     </table>
 </div>
+</c:if>
 <script>
     let id_code = document.getElementById("prod_ID");
     let id_name = document.getElementById("prod_NAME");
@@ -98,5 +100,6 @@
         });
     }
 </script>
+
 </body>
 </html>

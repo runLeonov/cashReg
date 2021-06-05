@@ -146,4 +146,84 @@ public class Report {
     public void setSumTotal(double sumTotal) {
         this.sumTotal = sumTotal;
     }
+
+    public static class Builder {
+        private Report report;
+
+        public Builder() {
+            report = new Report();
+        }
+
+        public Builder withPrintTime(Timestamp printTime) {
+            report.printTime = printTime;
+            return this;
+        }
+
+        public Builder withCountChecks(int countChecks) {
+            report.countChecks = countChecks;
+            return this;
+        }
+
+        public Builder withCountCancelChecks(int countCancelChecks) {
+            report.countCancelChecks = countCancelChecks;
+            return this;
+        }
+
+        public Builder withTotalA(double totalA) {
+            report.totalA = totalA;
+            return this;
+        }
+
+        public Builder withTotalB(double totalB) {
+            report.totalB = totalB;
+            return this;
+        }
+
+        public Builder withTotalC(double totalC) {
+            report.totalC = totalC;
+            return this;
+        }
+
+        public Builder withSumTotal(double sumTotal) {
+            report.sumTotal = sumTotal;
+            return this;
+        }
+
+        public Builder withNdsTotalA(double ndsTotalA) {
+            report.ndsTotalA = ndsTotalA;
+            return this;
+        }
+
+        public Builder withNdsTotalB(double ndsTotalB) {
+            report.ndsTotalB = ndsTotalB;
+            return this;
+        }
+
+        public Builder withNdsTotalC(double ndsTotalC) {
+            report.ndsTotalC = ndsTotalC;
+            return this;
+        }
+
+        public Builder withSumNdsTotal(double sumNdsTotal) {
+            report.sumNdsTotal = sumNdsTotal;
+            return this;
+        }
+
+        public Report build() {
+            return report;
+        }
+
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+

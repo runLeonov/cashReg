@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebFilter(urlPatterns = {"/*"})
 public class MainFilter implements Filter {
@@ -14,7 +15,7 @@ public class MainFilter implements Filter {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = ((HttpServletRequest) request).getSession();
         String path = ((HttpServletRequest) request).getServletPath();
-        if ((session == null || session.getAttribute("user") == null)
+        if ((Objects.isNull(session) || Objects.isNull(session.getAttribute("user")))
                 && !path.equals("/")
                 && !path.equals("/login")
                 && !path.equals("/logout")

@@ -1,6 +1,6 @@
 package ua.training.dao.entity;
 
-public class Model {
+public abstract class Model {
     private int id;
 
     public Model() {

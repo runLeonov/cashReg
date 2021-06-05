@@ -1,6 +1,5 @@
 package ua.training.service;
 
-import org.apache.lucene.search.Weight;
 import ua.training.dao.daoimpl.ProductInCheckStoreDAO;
 import ua.training.dao.daoimpl.factory.DAOFactory;
 import ua.training.dao.entity.Product;

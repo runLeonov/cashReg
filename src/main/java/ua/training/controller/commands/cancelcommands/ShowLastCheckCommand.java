@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class ShowLastCheckCommand implements Command {
-    private static Logger logger = Logger.getLogger(ShowLastCheckCommand.class);
+    private static final Logger logger = Logger.getLogger(ShowLastCheckCommand.class);
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         CheckService service = ServiceFactory.getInstance().getCheckService();

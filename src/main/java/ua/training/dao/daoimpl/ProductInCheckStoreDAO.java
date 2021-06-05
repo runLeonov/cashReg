@@ -14,31 +14,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProductInCheckStoreDAO implements IProductInCheckDAO {
-    private static Logger logger = Logger.getLogger(ProductInCheckStoreDAO.class);
+    private static final Logger logger = Logger.getLogger(ProductInCheckStoreDAO.class);
 
     @Override
     public ProductInCheckStore findByNameOfProd(String name) {
-        if (name != null) {
-            try (Connection connection = ConnectorToDB.getInstance().connect();
-                 PreparedStatement statement = connection.prepareStatement(
-                         ConstantsDAO.SELECT_ALL_PRODS_IN_STORE_BY_NAME)) {
-                statement.setString(1, name);
-                ResultSet resultSet = statement.executeQuery();
-                if (resultSet.first()) {
-                    ProductInCheckStore product = new ProductInCheckStore();
-                    product.setId(resultSet.getInt("products.Id"));
-                    product.getProduct().setPrice(resultSet.getDouble("products.Price"));
-                    product.getProduct().setNameOfProd(resultSet.getString("products.NameOfProd"));
-                    product.setTotalPrice(resultSet.getDouble("prod_in_store.TotalPrice"));
-                    product.setWeightOrCount(resultSet.getDouble("prod_in_store.Weight"));
-                    return product;
-                }
-
-            } catch (SQLException | NamingException e) {
-                logger.error(e);
+        try (Connection connection = ConnectorToDB.getInstance().connect();
+             PreparedStatement statement = connection.prepareStatement(
+                     ConstantsDAO.SELECT_ALL_PRODS_IN_STORE_BY_NAME)) {
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.first()) {
+                ProductInCheckStore product = new ProductInCheckStore();
+                product.setId(resultSet.getInt("products.Id"));
+                product.getProduct().setPrice(resultSet.getDouble("products.Price"));
+                product.getProduct().setNameOfProd(resultSet.getString("products.NameOfProd"));
+                product.setTotalPrice(resultSet.getDouble("prod_in_store.TotalPrice"));
+                product.setWeightOrCount(resultSet.getDouble("prod_in_store.Weight"));
+                return product;
             }
+
+        } catch (SQLException | NamingException e) {
+            logger.error(e);
         }
         return null;
     }
@@ -52,14 +51,22 @@ public class ProductInCheckStoreDAO implements IProductInCheckDAO {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 String nameProd = resultSet.getString("products.NameOfProd");
-                Double price = Double.parseDouble(resultSet.getString("products.Price"));
-                Double weight = Double.parseDouble(resultSet.getString("prod_in_store.Weight"));
-                Double total = Double.parseDouble(resultSet.getString("prod_in_store.Weight"));
-                Integer id = Integer.parseInt(resultSet.getString("prod_in_store.Id"));
+                double price = Double.parseDouble(resultSet.getString("products.Price"));
+                double weight = Double.parseDouble(resultSet.getString("prod_in_store.Weight"));
+                double total = Double.parseDouble(resultSet.getString("prod_in_store.Weight"));
+                int id = Integer.parseInt(resultSet.getString("prod_in_store.Id"));
                 productInCheckStores.add(
-                        new ProductInCheckStore(
-                                id, new Product(nameProd, price), weight, total
-                        ));
+                        new ProductInCheckStore.Builder()
+                                .withId(id)
+                                .withProduct(new Product.Builder()
+                                        .withName(nameProd)
+                                        .withPrice(price)
+                                        .build()
+                                )
+                                .withWeightOrCount(weight)
+                                .withTotalPrice(total)
+                                .build()
+                );
             }
         } catch (SQLException | NamingException e) {
             logger.error(e);
@@ -114,13 +121,19 @@ public class ProductInCheckStoreDAO implements IProductInCheckDAO {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.first()) {
-                Product p = new Product();
-                Integer idEd = resultSet.getInt("products.Id");
-                p.setNameOfProd(resultSet.getString("products.NameOfProd"));
-                p.setPrice(resultSet.getDouble("products.Price"));
-                Double totalPrice = resultSet.getDouble("prod_in_store.TotalPrice");
-                Double weight = resultSet.getDouble("prod_in_store.Weight");
-                return new ProductInCheckStore(idEd, p, weight, totalPrice);
+                Product p = new Product.Builder()
+                        .withName(resultSet.getString("products.NameOfProd"))
+                        .withPrice(resultSet.getDouble("products.Price"))
+                        .build();
+                int idEd = resultSet.getInt("products.Id");
+                double totalPrice = resultSet.getDouble("prod_in_store.TotalPrice");
+                double weight = resultSet.getDouble("prod_in_store.Weight");
+                return new ProductInCheckStore.Builder()
+                        .withId(idEd)
+                        .withProduct(p)
+                        .withWeightOrCount(weight)
+                        .withTotalPrice(totalPrice)
+                        .build();
             }
         } catch (SQLException | NamingException e) {
             logger.error(e);
@@ -171,7 +184,7 @@ public class ProductInCheckStoreDAO implements IProductInCheckDAO {
 
     @Override
     public ProductInCheckStore update(ProductInCheckStore entity) {
-        if (entity != null) {
+        if (Objects.nonNull(entity)) {
             try (Connection connection = ConnectorToDB.getInstance().connect();
                  PreparedStatement statement = connection.prepareStatement(
                          ConstantsDAO.UPDATE_PRODS_IN_STORE_WEIGHT_BY_ID)) {

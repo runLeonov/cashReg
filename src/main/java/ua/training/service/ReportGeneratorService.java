@@ -20,29 +20,29 @@ public class ReportGeneratorService {
     }
 
     private Report createRep() {
-        Integer countOfChecks = checkDAO.getCountOfChecks();
-        Integer deletedChecks = checkDAO.getCountOfDeletedChecks();
-        Double totalA = checkWithProductsDAO.getTotalSum();
-        Double totalB = 0.0;
-        Double totalC = 0.0;
-        Double totalSum = totalA + totalB + totalC;
-        Double ndsA = totalSum * 0.2;
-        Double ndsB = 0.0;
-        Double ndsC = 0.0;
-        Double totalNds = ndsA + ndsB + ndsC;
-        return new Report(
-                new Timestamp(System.currentTimeMillis()),
-                countOfChecks,
-                deletedChecks,
-                totalA,
-                totalB,
-                totalC,
-                totalSum,
-                ndsA,
-                ndsB,
-                ndsC,
-                totalNds
-        );
+        int countOfChecks = checkDAO.getCountOfChecks();
+        int deletedChecks = checkDAO.getCountOfDeletedChecks();
+        double totalA = checkWithProductsDAO.getTotalSum();
+        double totalB = 0.0;
+        double totalC = 0.0;
+        double totalSum = totalA + totalB + totalC;
+        double ndsA = totalSum * 0.2;
+        double ndsB = 0.0;
+        double ndsC = 0.0;
+        double totalNds = ndsA + ndsB + ndsC;
+        return new Report.Builder()
+                .withPrintTime(new Timestamp(System.currentTimeMillis()))
+                .withCountCancelChecks(deletedChecks)
+                .withCountChecks(countOfChecks)
+                .withTotalA(totalA)
+                .withTotalB(totalB)
+                .withTotalC(totalC)
+                .withSumTotal(totalSum)
+                .withNdsTotalA(ndsA)
+                .withNdsTotalB(ndsB)
+                .withNdsTotalC(ndsC)
+                .withSumNdsTotal(totalNds)
+                .build();
     }
 
 }

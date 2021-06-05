@@ -24,13 +24,12 @@ public class ProductDAO implements IProductDAO {
                 statement.setString(1, name);
                 ResultSet resultSet = statement.executeQuery();
                 if (resultSet.first()) {
-                    Product product = new Product();
-                    product.setId(resultSet.getInt("products.Id"));
-                    product.setPrice(resultSet.getDouble("products.Price"));
-                    product.setNameOfProd(resultSet.getString("products.NameOfProd"));
-                    return product;
+                    return new Product.Builder()
+                            .withId(resultSet.getInt("products.Id"))
+                            .withName(resultSet.getString("products.NameOfProd"))
+                            .withPrice(resultSet.getDouble("products.Price"))
+                            .build();
                 }
-
             } catch (SQLException | NamingException e) {
                 logger.error(e);
             }
@@ -46,11 +45,11 @@ public class ProductDAO implements IProductDAO {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.first()) {
-                Product product = new Product();
-                product.setId(resultSet.getInt("products.Id"));
-                product.setPrice(resultSet.getDouble("products.Price"));
-                product.setNameOfProd(resultSet.getString("products.NameOfProd"));
-                return product;
+                return new Product.Builder()
+                        .withId(resultSet.getInt("products.Id"))
+                        .withName(resultSet.getString("products.NameOfProd"))
+                        .withPrice(resultSet.getDouble("products.Price"))
+                        .build();
             }
 
         } catch (SQLException | NamingException e) {

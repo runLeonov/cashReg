@@ -26,7 +26,10 @@ public class AddToStoreCommand implements Command {
                     && !weightStr.equals("")) {
                 Double price = Double.parseDouble(priceStr);
                 Double weight = Double.parseDouble(weightStr);
-                Product product = new Product(nameStr, price);
+                Product product = new Product.Builder()
+                        .withName(nameStr)
+                        .withPrice(price)
+                        .build();
 
                 ProductService service = ServiceFactory.getInstance().getProductService();
                 boolean b = service.insert(product);

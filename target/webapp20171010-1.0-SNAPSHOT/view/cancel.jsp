@@ -18,6 +18,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp" flush="true"/>
+<c:if test="${sessionScope.user.userRoleId == '2'}">
 <div class="createCheck">
     <form method="post" class="formToCreate">
         <c:if test="${not empty checkNotFoundById}"><fmt:message key="cancel.check.not_found"/> <br></c:if>
@@ -53,7 +54,7 @@
         <col width="150" valign="top">
         <col width="100" valign="top">
         <tr bgcolor="#bd4a5b">
-            <td height="40" colspan="4" style="text-align: center" class="col"><fmt:message
+            <td height="    40" colspan="4" style="text-align: center" class="col"><fmt:message
                     key="cancel.check.table.id_check"/>: ${sessionScope.checks.id}  </td>
         </tr>
         <tr bgcolor="#bd4a5b">
@@ -72,5 +73,6 @@
         </c:forEach>
     </table>
 </div>
+</c:if>
 </body>
 </html>

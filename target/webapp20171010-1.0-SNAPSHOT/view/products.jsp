@@ -18,6 +18,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp" flush="true"/>
+<c:if test="${sessionScope.user.userRoleId == '3'}">
 <div class="createCheck">
     <form method="post" class="formToCreate">
         <h4><fmt:message key="products.form.add.add_new_product"/> </h4>
@@ -80,5 +81,6 @@
         </c:forEach>
     </table>
 </div>
+</c:if>
 </body>
 </html>

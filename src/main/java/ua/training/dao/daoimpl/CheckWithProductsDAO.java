@@ -105,16 +105,27 @@ public class CheckWithProductsDAO implements ICheckWithProductsDAO {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 String nameProd = resultSet.getString("p.NameOfProd");
-                Double price = Double.parseDouble(resultSet.getString("mycheck_and_prods.Price"));
-                Double weight = Double.parseDouble(resultSet.getString("mycheck_and_prods.Weight"));
-                Integer idOfProd = Integer.parseInt(resultSet.getString("pis.Id"));
-                Double priceInCheck = Double.parseDouble(resultSet.getString("mycheck_and_prods.Price"));
+                double price = Double.parseDouble(resultSet.getString("mycheck_and_prods.Price"));
+                double weight = Double.parseDouble(resultSet.getString("mycheck_and_prods.Weight"));
+                int idOfProd = Integer.parseInt(resultSet.getString("pis.Id"));
+                double priceInCheck = Double.parseDouble(resultSet.getString("mycheck_and_prods.Price"));
                 productInCheckStores.add(
-                        new ProductInCheckStore(
-                                idOfProd, new Product(nameProd, price), weight, priceInCheck
-                        ));
+                        new ProductInCheckStore.Builder()
+                                .withId(idOfProd)
+                                .withProduct(new Product.Builder()
+                                        .withName(nameProd)
+                                        .withPrice(price)
+                                        .build()
+                                )
+                                .withWeightOrCount(weight)
+                                .withTotalPrice(priceInCheck)
+                                .build()
+                );
             }
-            return new Check(id, productInCheckStores);
+            return new Check.Builder()
+                    .withId(id)
+                    .withProducts(productInCheckStores)
+                    .build();
         } catch (SQLException | NamingException e) {
             logger.error(e);
         }
