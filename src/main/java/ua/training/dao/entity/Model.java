@@ -1,5 +1,8 @@
 package ua.training.dao.entity;
 
+/**
+ * @author LeonovOleksand
+ */
 public abstract class Model {
     private int id;
 

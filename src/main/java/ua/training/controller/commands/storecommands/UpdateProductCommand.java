@@ -12,8 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
+/**
+ * class Command to update
+ * product in store by id
+ *
+ * @author LeonovOleksand
+ */
 public class UpdateProductCommand implements Command {
     private static Logger logger = Logger.getLogger(UpdateProductCommand.class);
+
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         ProductService service =
@@ -34,14 +41,15 @@ public class UpdateProductCommand implements Command {
                 Product product = service.updatePrice(price, id);
                 ProductInCheckStore productInCheckStore = checkService.updateWeight(weight, id);
                 if (Objects.isNull(productInCheckStore) || Objects.isNull(product)) {
-                    logger.info("Продукт не знайдено: " + id);
+                    logger.info("Product wasn't found: " + id);
                     req.setAttribute("notFoundUpdate", true);
                     return null;
                 }
-                logger.info("Продукт успішно змінено: " + id);
+                logger.info("Product updated: " + id);
             }
         } catch (NumberFormatException e) {
             req.setAttribute("wrongInputUpdate", true);
+            logger.info("Wrong input!");
             return null;
         }
         req.setAttribute("newProdPriceEd", null);

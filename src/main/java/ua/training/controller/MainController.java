@@ -1,6 +1,9 @@
 package ua.training.controller;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import ua.training.controller.commands.Command;
+import ua.training.dao.ConnectorToDB;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(
-        urlPatterns = {"/error", "/login", "/check", "/products", "/cancel", "/logout", "/registration", "/report"}
+        urlPatterns = {"/", "/error", "/login", "/check", "/products", "/cancel", "/logout", "/registration", "/report"}
 )
 public class MainController extends HttpServlet {
+
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)

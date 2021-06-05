@@ -7,8 +7,6 @@ import ua.training.dao.daoimpl.interfaces.IUserDAO;
 import ua.training.dao.entity.User;
 
 import javax.naming.NamingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +15,7 @@ import java.util.Objects;
 
 
 public class UserDAO implements IUserDAO {
-    private static Logger logger = Logger.getLogger(UserDAO.class);
+    private static final Logger logger = Logger.getLogger(UserDAO.class);
 
     @Override
     public User findById(Integer id) {
@@ -64,6 +62,8 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public User update(User entity) {
+
+
         if (Objects.nonNull(entity)) {
             try (Connection connection = ConnectorToDB.getInstance().connect();
                  PreparedStatement statement = connection.prepareStatement(

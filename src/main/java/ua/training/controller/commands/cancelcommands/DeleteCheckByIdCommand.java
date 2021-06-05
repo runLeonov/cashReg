@@ -8,8 +8,15 @@ import ua.training.service.factory.ServiceFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * class Command for deleting
+ * check from database by id
+ *
+ * @author LeonovOleksand
+ */
 public class DeleteCheckByIdCommand implements Command {
     private static final Logger logger = Logger.getLogger(DeleteCheckByIdCommand.class);
+
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         CheckService service = ServiceFactory.getInstance().getCheckService();
@@ -17,12 +24,12 @@ public class DeleteCheckByIdCommand implements Command {
         if (!idStr.equals("")) {
             int id = Integer.parseInt(idStr);
             if (service.delete(id)) {
-                logger.info("Чек видалено.");
+                logger.info("Check deleted");
                 req.setAttribute("checkDeletedById", true);
                 req.getSession().setAttribute("checks", null);
                 req.getSession().setAttribute("products", null);
             } else {
-                logger.info("Чеку з номером " + id + " не знайдено");
+                logger.info("Check with id: " + id + " not found");
                 req.setAttribute("checkNotFoundById", true);
             }
         }

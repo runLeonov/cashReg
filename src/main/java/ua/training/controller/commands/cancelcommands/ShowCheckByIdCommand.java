@@ -12,6 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * class Command for showing
+ * check from database by id
+ *
+ * @author LeonovOleksand
+ */
 public class ShowCheckByIdCommand implements Command {
     private static final Logger logger = Logger.getLogger(ShowCheckByIdCommand.class);
 
@@ -24,12 +30,12 @@ public class ShowCheckByIdCommand implements Command {
             int id = Integer.parseInt(idStr);
             Check check = service.getById(id);
             if (check.getProducts().size() != 0) {
-                logger.info("Чек знайдено");
+                logger.info("Check founded");
                 List<ProductInCheckStore> productInCheckStores = check.getProducts();
                 session.setAttribute("products", productInCheckStores);
                 session.setAttribute("checks", check);
             } else {
-                logger.info("Чеку з номером " + id + " не знайдено");
+                logger.info("Check with id: " + id + " not found");
                 req.setAttribute("checkNotFoundById", true);
             }
         }

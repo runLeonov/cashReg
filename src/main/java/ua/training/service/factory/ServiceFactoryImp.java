@@ -4,8 +4,7 @@ import org.apache.log4j.Logger;
 import ua.training.service.*;
 
 public class ServiceFactoryImp extends ServiceFactory {
-
-    private static Logger logger = Logger.getLogger(ServiceFactoryImp.class);
+    private static final Logger logger = Logger.getLogger(ServiceFactoryImp.class);
 
     private CheckService checkService = new CheckService();
     private ProductInCheckStoreService productInCheckStoreService = new ProductInCheckStoreService();

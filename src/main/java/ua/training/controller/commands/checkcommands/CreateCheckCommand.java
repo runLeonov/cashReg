@@ -12,8 +12,15 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * class Command to create
+ * check with products
+ *
+ * @author LeonovOleksand
+ */
 public class CreateCheckCommand implements Command {
     private static final Logger logger = Logger.getLogger(ClearCheckCommand.class);
+
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         CheckService service = ServiceFactory.getInstance().getCheckService();
@@ -22,9 +29,9 @@ public class CreateCheckCommand implements Command {
         List<ProductInCheckStore> productInCheckStores =
                 (List<ProductInCheckStore>) httpSession.getAttribute("productsInCheck");
 
-        if (  Objects.nonNull(productInCheckStores) && !productInCheckStores.isEmpty()) {
+        if (Objects.nonNull(productInCheckStores) && !productInCheckStores.isEmpty()) {
             if (service.insert(productInCheckStores)) {
-                logger.info("Чек створено");
+                logger.info("Check created");
                 req.setAttribute("checkCreated", true);
             }
             httpSession.setAttribute("productsInCheck", null);

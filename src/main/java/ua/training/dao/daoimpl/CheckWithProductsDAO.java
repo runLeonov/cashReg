@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheckWithProductsDAO implements ICheckWithProductsDAO {
-    private static Logger logger = Logger.getLogger(CheckWithProductsDAO.class);
+
+    private static final Logger logger = Logger.getLogger(CheckWithProductsDAO.class);
 
     @Override
     public boolean insert(Integer id, ProductInCheckStore product) {
@@ -87,7 +88,7 @@ public class CheckWithProductsDAO implements ICheckWithProductsDAO {
                      ConstantsDAO.SELECT_SUM_CHECK_WITH_PRODS)) {
             ResultSet set = statement.executeQuery();
             set.next();
-            Double sum = set.getDouble(1);
+            double sum = set.getDouble(1);
             return sum;
         } catch (SQLException | NamingException e) {
             logger.error(e);

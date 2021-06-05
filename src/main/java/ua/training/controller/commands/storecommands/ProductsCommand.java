@@ -10,6 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+
+/**
+ * class Command to show
+ * all products from store
+ *
+ * @author LeonovOleksand
+ */
 public class ProductsCommand implements Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {

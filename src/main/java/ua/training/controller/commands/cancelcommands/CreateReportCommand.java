@@ -11,8 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
+/**
+ * class Command for creating
+ * report X and report Z
+ *
+ * @author LeonovOleksand
+ */
 public class CreateReportCommand implements Command {
     private static final Logger logger = Logger.getLogger(CreateReportCommand.class);
+
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
@@ -22,13 +29,13 @@ public class CreateReportCommand implements Command {
         if (Objects.nonNull(req.getParameter("btnCreateXReport"))) {
             Report report = service.createAndGetX();
             session.setAttribute("reportX", report);
-            logger.info("Створення звіту Х");
+            logger.info("Report X");
             session.setAttribute("reportZ", null);
             return "report";
         } else if (Objects.nonNull(req.getParameter("btnCreateZReport"))) {
             Report report = service.createAndGetZ();
             session.setAttribute("reportZ", report);
-            logger.info("Створення звіту Z");
+            logger.info("Report Z");
             session.setAttribute("reportX", null);
             return "report";
         }

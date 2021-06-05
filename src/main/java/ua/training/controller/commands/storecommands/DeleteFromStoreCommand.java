@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
+/**
+ * class Command to delete
+ * product in store by id
+ *
+ * @author LeonovOleksand
+ */
 public class DeleteFromStoreCommand implements Command {
     private static Logger logger = Logger.getLogger(DeleteFromStoreCommand.class);
 
@@ -23,16 +29,17 @@ public class DeleteFromStoreCommand implements Command {
             if (!idStr.equals("")) {
                 Integer id = Integer.parseInt(idStr);
                 if (Objects.isNull(service.getById(id)) || Objects.isNull(productService.getById(id))) {
-                    logger.info("Продукт не знайдено: " + id);
+                    logger.info("Product wasn't found: " + id);
                     req.setAttribute("notFoundDelete", true);
                     return null;
                 }
                 service.delete(id);
                 productService.delete(id);
-                logger.info("Продукт успішно видалено: " + id);
+                logger.info("Product deleted successfully: " + id);
             }
         } catch (NumberFormatException e) {
             req.setAttribute("wrongInputDelete", true);
+            logger.info("Wrong input!");
             return null;
         }
         req.setAttribute("deleteId", null);

@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
+/**
+ * class Command for
+ * registration new user
+ *
+ * @author LeonovOleksand
+ */
 public class RegistrationCommand implements Command {
     private static final Logger logger = Logger.getLogger(RegistrationCommand.class);
 
@@ -24,10 +30,10 @@ public class RegistrationCommand implements Command {
 
         if (Objects.nonNull(user) && Objects.nonNull(user.getName())) {
             req.getSession().setAttribute("user", user);
-            logger.info("Зареєстрований новий користувач: " + req.getParameter("name"));
+            logger.info("New user was registered: " + req.getParameter("name"));
             return "login";
         } else {
-            logger.info("Користувач під таким емейлом вже існує");
+            logger.info("User with same email already exist");
             req.setAttribute("existsLogin", req.getParameter("email"));
             return "registration";
         }

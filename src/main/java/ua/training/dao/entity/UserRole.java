@@ -1,9 +1,10 @@
 package ua.training.dao.entity;
 
 
+/**
+ * @author LeonovOleksand
+ */
 public enum UserRole {
-
-
     CASHIER(1), SENIOR_CASHIER(2), COMMODITY_EXPERT(3), DEFAULT(4);
 
     private UserRole userRole;

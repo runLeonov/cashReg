@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CheckDAO implements ICheckDAO {
-    private static Logger logger = Logger.getLogger(CheckDAO.class);
+    private static final Logger logger = Logger.getLogger(CheckDAO.class);
 
     @Override
     public boolean insert() {

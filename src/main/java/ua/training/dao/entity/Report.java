@@ -2,6 +2,9 @@ package ua.training.dao.entity;
 
 import java.sql.Timestamp;
 
+/**
+ * @author LeonovOleksand
+ */
 public class Report {
     private Timestamp printTime;
     private int countChecks;
@@ -16,30 +19,6 @@ public class Report {
     private double sumNdsTotal;
 
     public Report() {
-    }
-
-    public Report(Timestamp printTime,
-                  int countChecks,
-                  int countCancelChecks,
-                  double totalA,
-                  double totalB,
-                  double totalC,
-                  double sumTotal,
-                  double ndsTotalA,
-                  double ndsTotalB,
-                  double ndsTotalC,
-                  double sumNdsTotal) {
-        this.printTime = printTime;
-        this.countChecks = countChecks;
-        this.countCancelChecks = countCancelChecks;
-        this.totalA = totalA;
-        this.totalB = totalB;
-        this.totalC = totalC;
-        this.ndsTotalA = ndsTotalA;
-        this.ndsTotalB = ndsTotalB;
-        this.ndsTotalC = ndsTotalC;
-        this.sumNdsTotal = sumNdsTotal;
-        this.sumTotal = sumTotal;
     }
 
     @Override

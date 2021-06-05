@@ -10,6 +10,12 @@ import ua.training.service.factory.ServiceFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * class Command to add
+ * new product in store
+ *
+ * @author LeonovOleksand
+ */
 public class AddToStoreCommand implements Command {
     private static Logger logger = Logger.getLogger(AddToStoreCommand.class);
 
@@ -40,10 +46,11 @@ public class AddToStoreCommand implements Command {
                 product = service.findByNameOfProd(nameStr);
                 productInCheckStoreService.insertToStore(product, weight);
 
-                logger.info("Продукт додано");
+                logger.info("Product added to store");
             }
         } catch (NumberFormatException e) {
             req.setAttribute("wrongInputAdd", true);
+            logger.info("Wrong input!");
             return null;
         }
         return "products";

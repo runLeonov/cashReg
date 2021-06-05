@@ -7,8 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import static ua.training.controller.commands.commandfactory.CommandFactory.Commands.*;
 
-public class CommandHelper {
 
+public class CommandHelper {
+    /**
+     * Get Command
+     *
+     * @param req HttpServletRequest
+     * @return Command
+     */
     public static Command getCommand(HttpServletRequest req) {
         CommandFactory commands = CommandFactory.getInstance();
         switch (req.getServletPath()) {
@@ -62,6 +68,12 @@ public class CommandHelper {
         return null;
     }
 
+    /**
+     * Get a page to display
+     *
+     * @param req HttpServletRequest
+     * @return page
+     */
     public static String getPage(HttpServletRequest req) {
         String page = req.getServletPath();
         if (page.equals("/") || page.equals("/login") || page.equals("/logout")) {

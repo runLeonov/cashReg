@@ -1,6 +1,12 @@
 package ua.training.dao.entity;
 
-public class Product extends Model {
+import java.io.Serializable;
+
+/**
+ * @author LeonovOleksand
+ */
+public class Product extends Model implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String nameOfProd;
     private double price;
 

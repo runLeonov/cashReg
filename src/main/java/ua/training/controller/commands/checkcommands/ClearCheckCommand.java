@@ -8,13 +8,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
+
+/**
+ * class Command to
+ * clear checklist
+ *
+ * @author LeonovOleksand
+ */
 public class ClearCheckCommand implements Command {
     private static Logger logger = Logger.getLogger(ClearCheckCommand.class);
+
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession httpSession = req.getSession();
         if (Objects.nonNull(httpSession.getAttribute("productsInCheck"))) {
-            logger.info("Чек очищено");
+            logger.info("Checklist cleared");
             httpSession.setAttribute("productsInCheck", null);
         }
         return "check";

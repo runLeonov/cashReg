@@ -15,6 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
+/**
+ * class Command to
+ * add product in checklist
+ *
+ * @author LeonovOleksand
+ */
 public class AddToCheckCommand implements Command {
     private static final Logger logger = Logger.getLogger(AddToCheckCommand.class);
 
@@ -33,44 +40,44 @@ public class AddToCheckCommand implements Command {
 
         String prodIdStr = req.getParameter("prodId");
         String weightStr = req.getParameter("weight");
+        String prodName = String.valueOf(req.getParameter("prodName"));
         try {
-            Integer prodId = 1;
-            if (prodIdStr != "") {
-                prodId = Integer.parseInt(prodIdStr);
-            }
-            String prodName = String.valueOf(req.getParameter("prodName"));
-            Double weight = 1.0;
-            if (weightStr != "") {
-                weight = Double.parseDouble(weightStr);
-            }
+            int prodId = 1;
+            double weight = 1.0;
+            prodId = Integer.parseInt(prodIdStr);
+            weight = Double.parseDouble(weightStr);
             Product product;
-            if (prodName != "") {
+            if (prodName != "" && Objects.nonNull(prodName)) {
                 product = productService.findByNameOfProd(prodName);
             } else {
                 product = productService.getById(prodId);
             }
-            if (storeService.isEnough(weight, product.getId())) {
-                storeService.decrementWeight(weight, product.getId());
-            } else {
-                req.setAttribute("notEnough", true);
-                return null;
-            }
+
             if (Objects.nonNull(product)) {
+                if (storeService.isEnough(weight, product.getId())) {
+                    storeService.decrementWeight(weight, product.getId());
+                } else {
+                    req.setAttribute("notEnough", true);
+                    return null;
+                }
                 productInCheckStores.add(
                         new ProductInCheckStore.Builder()
-                        .withId(product.getId())
-                        .withProduct(product)
-                        .withWeightOrCount(weight)
-                        .withTotalPrice(weight * product.getPrice()).build()
+                                .withId(product.getId())
+                                .withProduct(product)
+                                .withWeightOrCount(weight)
+                                .withTotalPrice(weight * product.getPrice()).build()
                 );
+                logger.info("Product was added to check");
                 Double sum = productInCheckStores.stream().mapToDouble(ProductInCheckStore::getTotalPrice).sum();
                 httpSession.setAttribute("sumOfProds", sum);
             } else {
                 req.setAttribute("notFound", true);
+                logger.info("Product with this id or name wasn't found");
             }
 
         } catch (NumberFormatException e) {
             req.setAttribute("wrongInput", true);
+            logger.info("Wrong input");
         }
         return null;
     }

@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProductDAO implements IProductDAO {
-    private static Logger logger = Logger.getLogger(ProductDAO.class);
+    private static final Logger logger = Logger.getLogger(ProductDAO.class);
 
     @Override
     public Product findByNameOfProd(String name) {
@@ -49,6 +49,7 @@ public class ProductDAO implements IProductDAO {
                         .withId(resultSet.getInt("products.Id"))
                         .withName(resultSet.getString("products.NameOfProd"))
                         .withPrice(resultSet.getDouble("products.Price"))
+
                         .build();
             }
 

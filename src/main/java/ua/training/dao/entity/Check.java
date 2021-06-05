@@ -1,9 +1,15 @@
 package ua.training.dao.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Check extends Model {
+
+/**
+ * @author LeonovOleksand
+ */
+public class Check extends Model implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<ProductInCheckStore> products = new ArrayList<>();
 
     public List<ProductInCheckStore> getProducts() {

@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
-
+/**
+ * Command for authorization
+ *
+ * @author LeonovOleksand
+ */
 public class LoginCommand implements Command {
     private static final Logger logger = Logger.getLogger(LoginCommand.class);
 
@@ -26,11 +30,11 @@ public class LoginCommand implements Command {
         if (Objects.nonNull(dbUser)) {
             session.setAttribute("userNotExists", null);
             session.setAttribute("user", dbUser);
-            logger.info("Користувача авторизовано: " + dbUser.getName());
+            logger.info("User: " + dbUser.getName() + "was authorized");
             return service.returnUserRights(dbUser);
         } else {
             req.setAttribute("userNotExists", true);
-            logger.info("Користувача не знайдено");
+            logger.info("User wasn't found");
         }
         return "login";
     }
