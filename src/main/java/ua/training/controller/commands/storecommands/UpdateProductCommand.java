@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.training.controller.commands.Command;
 import ua.training.dao.entity.Product;
 import ua.training.dao.entity.ProductInCheckStore;
+import ua.training.dao.exсeptions.WrongInputException;
 import ua.training.service.ProductInCheckStoreService;
 import ua.training.service.ProductService;
 import ua.training.service.factory.ServiceFactory;
@@ -47,7 +48,7 @@ public class UpdateProductCommand implements Command {
                 }
                 logger.info("Product updated: " + id);
             }
-        } catch (NumberFormatException e) {
+        } catch (WrongInputException e) {
             req.setAttribute("wrongInputUpdate", true);
             logger.info("Wrong input!");
             return null;

@@ -6,7 +6,6 @@ import ua.training.dao.daoimpl.constans.ConstantsDAO;
 import ua.training.dao.daoimpl.interfaces.IUserDAO;
 import ua.training.dao.entity.User;
 
-import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,7 +35,7 @@ public class UserDAO implements IUserDAO {
                 return user;
             }
 
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return null;
@@ -53,7 +52,7 @@ public class UserDAO implements IUserDAO {
                 statement.setString(3, user.getEmail());
                 statement.executeUpdate();
                 return true;
-            } catch (SQLException | NamingException e) {
+            } catch (SQLException e) {
                 logger.error(e);
             }
         }
@@ -75,7 +74,7 @@ public class UserDAO implements IUserDAO {
                 statement.setInt(5, entity.getId());
                 statement.executeUpdate();
                 return entity;
-            } catch (SQLException | NamingException e) {
+            } catch (SQLException e) {
                 logger.error(e);
 
             }
@@ -91,7 +90,7 @@ public class UserDAO implements IUserDAO {
             statement.setInt(1, id);
             statement.executeUpdate();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
             e.printStackTrace();
         }
@@ -116,7 +115,7 @@ public class UserDAO implements IUserDAO {
                 user.setRoleById(resultSet.getInt("UserRoleId"));
                 return user;
             }
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return null;
@@ -139,7 +138,7 @@ public class UserDAO implements IUserDAO {
                 user.setRoleById(resultSet.getInt("UserRoleId"));
                 return user;
             }
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return null;

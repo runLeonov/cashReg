@@ -38,6 +38,21 @@ public class Report {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Report report = (Report) o;
+
+        return printTime != null ? printTime.equals(report.printTime) : report.printTime == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return printTime != null ? printTime.hashCode() : 0;
+    }
+
     public Timestamp getPrintTime() {
         return printTime;
     }

@@ -2,6 +2,7 @@ package ua.training.controller.commands.storecommands;
 
 import org.apache.log4j.Logger;
 import ua.training.controller.commands.Command;
+import ua.training.dao.exсeptions.WrongInputException;
 import ua.training.service.ProductInCheckStoreService;
 import ua.training.service.ProductService;
 import ua.training.service.factory.ServiceFactory;
@@ -37,7 +38,7 @@ public class DeleteFromStoreCommand implements Command {
                 productService.delete(id);
                 logger.info("Product deleted successfully: " + id);
             }
-        } catch (NumberFormatException e) {
+        } catch (WrongInputException e) {
             req.setAttribute("wrongInputDelete", true);
             logger.info("Wrong input!");
             return null;

@@ -6,7 +6,6 @@ import ua.training.dao.daoimpl.constans.ConstantsDAO;
 import ua.training.dao.daoimpl.interfaces.IProductDAO;
 import ua.training.dao.entity.Product;
 
-import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +29,7 @@ public class ProductDAO implements IProductDAO {
                             .withPrice(resultSet.getDouble("products.Price"))
                             .build();
                 }
-            } catch (SQLException | NamingException e) {
+            } catch (SQLException e) {
                 logger.error(e);
             }
         }
@@ -53,7 +52,7 @@ public class ProductDAO implements IProductDAO {
                         .build();
             }
 
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return null;
@@ -69,7 +68,7 @@ public class ProductDAO implements IProductDAO {
                 statement.setString(2, String.valueOf(product.getPrice()));
                 statement.executeUpdate();
                 return true;
-            } catch (SQLException | NamingException e) {
+            } catch (SQLException e) {
                 logger.error(e);
             }
         }
@@ -87,7 +86,7 @@ public class ProductDAO implements IProductDAO {
                 statement.setInt(3, entity.getId());
                 statement.executeUpdate();
                 return entity;
-            } catch (SQLException | NamingException e) {
+            } catch (SQLException e) {
                 logger.error(e);
             }
         }
@@ -103,7 +102,7 @@ public class ProductDAO implements IProductDAO {
             statement.setDouble(2, id);
             statement.executeUpdate();
             return findById(id);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return null;
@@ -117,7 +116,7 @@ public class ProductDAO implements IProductDAO {
             statement.setInt(1, id);
             statement.executeUpdate();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return false;

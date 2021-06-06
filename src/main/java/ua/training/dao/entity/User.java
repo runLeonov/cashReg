@@ -55,7 +55,11 @@ public class User extends Model implements Serializable {
 
         User user = (User) o;
 
-        return email != null ? email.equals(user.email) : user.email == null;
+        if (userRoleId != user.userRoleId) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        return role == user.role;
     }
 
     @Override

@@ -8,7 +8,6 @@ import ua.training.dao.entity.Check;
 import ua.training.dao.entity.Product;
 import ua.training.dao.entity.ProductInCheckStore;
 
-import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,7 +30,7 @@ public class CheckWithProductsDAO implements ICheckWithProductsDAO {
             statement.setDouble(4, product.getTotalPrice());
             statement.executeUpdate();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return false;
@@ -49,7 +48,7 @@ public class CheckWithProductsDAO implements ICheckWithProductsDAO {
                 statement.executeUpdate();
             }
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return false;
@@ -61,7 +60,7 @@ public class CheckWithProductsDAO implements ICheckWithProductsDAO {
                      ConstantsDAO.INSERT_INTO_CANCEL_CHECKS_EMPTY)) {
             statement.executeUpdate();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return false;
@@ -75,7 +74,7 @@ public class CheckWithProductsDAO implements ICheckWithProductsDAO {
             statement.setInt(1, id);
             statement.executeUpdate();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return false;
@@ -90,7 +89,7 @@ public class CheckWithProductsDAO implements ICheckWithProductsDAO {
             set.next();
             double sum = set.getDouble(1);
             return sum;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return null;
@@ -127,7 +126,7 @@ public class CheckWithProductsDAO implements ICheckWithProductsDAO {
                     .withId(id)
                     .withProducts(productInCheckStores)
                     .build();
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return null;
@@ -146,7 +145,7 @@ public class CheckWithProductsDAO implements ICheckWithProductsDAO {
                 statement.executeUpdate();
             }
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return false;

@@ -1,8 +1,8 @@
 package ua.training.dao;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import ua.training.dao.exсeptions.DataBaseException;
 
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,7 +14,7 @@ public final class ConnectorToDB {
     private static ConnectorToDB pool;
     private final DataSource dataSource;
 
-    public ConnectorToDB() throws NamingException {
+    public ConnectorToDB() throws DataBaseException {
         dataSource = getMysqlDataSource();
     }
 
@@ -28,7 +28,7 @@ public final class ConnectorToDB {
         return dataSource;
     }
 
-    public static synchronized ConnectorToDB getInstance() throws NamingException {
+    public static synchronized ConnectorToDB getInstance() throws DataBaseException {
         if (pool == null) {
             pool = new ConnectorToDB();
         }

@@ -7,7 +7,6 @@ import ua.training.dao.daoimpl.interfaces.ICheckDAO;
 import ua.training.dao.entity.Check;
 import ua.training.dao.entity.ProductInCheckStore;
 
-import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +22,7 @@ public class CheckDAO implements ICheckDAO {
                      connection.prepareStatement(ConstantsDAO.INSERT_INTO_CHECK)) {
             statement.executeUpdate();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return false;
@@ -37,7 +36,7 @@ public class CheckDAO implements ICheckDAO {
             ResultSet set = statement.executeQuery();
             set.next();
             return set.getInt(1);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return null;
@@ -52,7 +51,7 @@ public class CheckDAO implements ICheckDAO {
             if (set.first()) {
                 return set.getInt(1);
             }
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return null;
@@ -64,7 +63,7 @@ public class CheckDAO implements ICheckDAO {
              PreparedStatement statement = connection.prepareStatement(
                      ConstantsDAO.SELECT_ALL_CHECKID_BY_ID)) {
             statement.setInt(1, id);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return null;
@@ -79,7 +78,7 @@ public class CheckDAO implements ICheckDAO {
             if (set.first()) {
                 return set.getInt("Id");
             }
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return 0;
@@ -104,7 +103,7 @@ public class CheckDAO implements ICheckDAO {
                 statement.executeUpdate();
             }
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return false;
@@ -124,7 +123,7 @@ public class CheckDAO implements ICheckDAO {
             statement.setInt(1, id);
             statement.executeUpdate();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             logger.error(e);
         }
         return false;

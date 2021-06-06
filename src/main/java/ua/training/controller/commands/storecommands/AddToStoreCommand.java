@@ -3,6 +3,7 @@ package ua.training.controller.commands.storecommands;
 import org.apache.log4j.Logger;
 import ua.training.controller.commands.Command;
 import ua.training.dao.entity.Product;
+import ua.training.dao.exсeptions.WrongInputException;
 import ua.training.service.ProductInCheckStoreService;
 import ua.training.service.ProductService;
 import ua.training.service.factory.ServiceFactory;
@@ -38,8 +39,7 @@ public class AddToStoreCommand implements Command {
                         .build();
 
                 ProductService service = ServiceFactory.getInstance().getProductService();
-                boolean b = service.insert(product);
-                if (!b) {
+                if (!service.insert(product)) {
                     req.setAttribute("prodAlreadyExist", true);
                     return null;
                 }
@@ -48,7 +48,7 @@ public class AddToStoreCommand implements Command {
 
                 logger.info("Product added to store");
             }
-        } catch (NumberFormatException e) {
+        } catch (WrongInputException e) {
             req.setAttribute("wrongInputAdd", true);
             logger.info("Wrong input!");
             return null;

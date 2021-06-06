@@ -21,6 +21,21 @@ public class Check extends Model implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Check check = (Check) o;
+
+        return products != null ? products.equals(check.products) : check.products == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return products != null ? products.hashCode() : 0;
+    }
+
+    @Override
     public String toString() {
         return "Check{" +
                 "id" + super.getId() +
