@@ -50,7 +50,7 @@ public class MainController extends HttpServlet {
         }
         if (command == null || path == null) {
             String page = CommandHelper.getPage(req);
-            req.getRequestDispatcher("/view" + page + ".jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/view" + page + ".jsp").forward(req, resp);
         }
     }
 }

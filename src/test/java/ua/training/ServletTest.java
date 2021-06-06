@@ -93,7 +93,7 @@ public class ServletTest extends Mockito {
     @Test
     public void loginTest() throws ServletException, IOException {
         when(request.getServletPath()).thenReturn("/login");
-        when(request.getRequestDispatcher("/view/index.jsp")).thenReturn(dispatcher);
+        when(request.getRequestDispatcher("/WEB-INF/view/index.jsp")).thenReturn(dispatcher);
         servlet.doGet(request, response);
         when(request.getParameter("email")).thenReturn("oleksandr@gmail.com");
         when(request.getParameter("password")).thenReturn("password");
@@ -234,7 +234,7 @@ public class ServletTest extends Mockito {
     @Test
     public void registrationTest() throws ServletException, IOException {
         when(request.getServletPath()).thenReturn("/registration");
-        when(request.getRequestDispatcher("view/registration.jsp")).thenReturn(dispatcher);
+        when(request.getRequestDispatcher("/WEB-INF/view/registration.jsp")).thenReturn(dispatcher);
         servlet.doGet(request, response);
         PowerMockito.mockStatic(UserService.class);
         when(mock(UserService.class).registration(anyString(), anyString(), anyString())).thenReturn(new User());
