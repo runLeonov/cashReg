@@ -15,7 +15,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class CheckService implements ICheckService {
     private CheckWithProductsDAO checkWithProductsDAO = DAOFactory.getInstance().getCheckWithProductsDAO();
     private CheckDAO checkDAO = DAOFactory.getInstance().getCheckDAO();
-    private static final Logger logger = Logger.getLogger(CheckService.class);
 
     @Override
     public Check getById(Integer id) {

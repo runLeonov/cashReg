@@ -31,11 +31,11 @@ public class RegistrationCommand implements Command {
         if (Objects.nonNull(user) && Objects.nonNull(user.getName())) {
             req.getSession().setAttribute("user", user);
             logger.info("New user was registered: " + req.getParameter("name"));
-            return "login";
+            return "check";
         } else {
             logger.info("User with same email already exist");
             req.setAttribute("existsLogin", req.getParameter("email"));
-            return "registration";
+            return null;
         }
     }
 }

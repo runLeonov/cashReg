@@ -30,11 +30,11 @@ public class ReportGeneratorService {
             double totalA = checkWithProductsDAO.getTotalSum();
             double totalB = 0.0;
             double totalC = 0.0;
-            double totalSum = totalA + totalB + totalC;
+            double totalSum = Math.round((totalA + totalB + totalC) * 100.0) / 100.0;
             double ndsA = totalSum * 0.2;
             double ndsB = 0.0;
             double ndsC = 0.0;
-            double totalNds = ndsA + ndsB + ndsC;
+            double totalNds = Math.round((ndsA + ndsB + ndsC) * 100.0) / 100.0;
             report.set(new Report.Builder()
                     .withPrintTime(new Timestamp(System.currentTimeMillis()))
                     .withCountCancelChecks(deletedChecks)
