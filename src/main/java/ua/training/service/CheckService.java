@@ -23,7 +23,7 @@ public class CheckService implements ICheckService {
 
     @Override
     public boolean insert(Check entity) {
-        return false;
+        return checkDAO.insert(entity);
     }
 
     public Double getTotalSum() {
@@ -43,7 +43,7 @@ public class CheckService implements ICheckService {
 
     @Override
     public Check update(Check entity) {
-        return null;
+        return checkDAO.update(entity);
     }
 
     @Override
