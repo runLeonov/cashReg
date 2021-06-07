@@ -1,17 +1,21 @@
 package ua.training.service;
 
+import org.apache.log4j.Logger;
 import ua.training.dao.daoimpl.CheckDAO;
 import ua.training.dao.daoimpl.CheckWithProductsDAO;
 import ua.training.dao.daoimpl.factory.DAOFactory;
 import ua.training.dao.entity.Check;
 import ua.training.dao.entity.ProductInCheckStore;
 import ua.training.service.serviceinterfaces.ICheckService;
+import ua.training.service.transaction.TransactionHandler;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CheckService implements ICheckService {
     private CheckWithProductsDAO checkWithProductsDAO = DAOFactory.getInstance().getCheckWithProductsDAO();
     private CheckDAO checkDAO = DAOFactory.getInstance().getCheckDAO();
+    private static final Logger logger = Logger.getLogger(CheckService.class);
 
     @Override
     public Check getById(Integer id) {
@@ -45,11 +49,16 @@ public class CheckService implements ICheckService {
 
     @Override
     public boolean delete(Integer id) {
-        if (checkWithProductsDAO.findById(id).getProducts().size() == 0) {
-            return false;
-        }
-        checkDAO.insertToDeleted(checkWithProductsDAO.findById(id));
-        checkWithProductsDAO.incrementDeletedChecks();
-        return checkWithProductsDAO.delete(id) && checkDAO.delete(id);
+        AtomicBoolean f = new AtomicBoolean(false);
+        TransactionHandler.execute(connection -> {
+            if (checkWithProductsDAO.findById(id).getProducts().size() == 0) {
+                f.set(false);
+                return;
+            }
+            checkDAO.insertToDeleted(checkWithProductsDAO.findById(id));
+            checkWithProductsDAO.incrementDeletedChecks();
+            f.set(checkWithProductsDAO.delete(id) && checkDAO.delete(id));
+        });
+        return f.get();
     }
 }

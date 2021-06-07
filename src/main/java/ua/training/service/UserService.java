@@ -5,9 +5,11 @@ import ua.training.dao.daoimpl.factory.DAOFactory;
 import ua.training.dao.entity.User;
 import ua.training.dao.entity.UserRole;
 import ua.training.service.serviceinterfaces.IUserService;
+import ua.training.service.transaction.TransactionHandler;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class UserService implements IUserService {
     private UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
@@ -54,26 +56,27 @@ public class UserService implements IUserService {
             return "products";
         } else if (UserRole.SENIOR_CASHIER.equals(type)) {
             return "cancel";
-        } else if (UserRole.CASHIER.equals(type)) {
-            return "check";
         } else {
-            return null;
+            return "check";
         }
     }
 
     @Override
     public User registration(String userName, String login, String password) {
-        if (userDAO.findUserByLogin(login) != null) {
-            return null;
-        }
-        User user = new User.Builder()
-                .withName(userName)
-                .withPassword(password)
-                .withEmail(login)
-                .withUserRole(UserRole.CASHIER)
-                .withUserRoleId(1)
-                .build();
-        userDAO.insert(user);
-        return user;
+        AtomicReference<User> user = new AtomicReference<>(new User());
+        TransactionHandler.execute(connection -> {
+            if (Objects.nonNull(userDAO.findUserByLogin(login))) {
+                return;
+            }
+            user.set(new User.Builder()
+                    .withName(userName)
+                    .withPassword(password)
+                    .withEmail(login)
+                    .withUserRole(UserRole.CASHIER)
+                    .withUserRoleId(1)
+                    .build());
+            userDAO.insert(user.get());
+        });
+        return user.get();
     }
 }

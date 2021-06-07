@@ -18,7 +18,7 @@ public interface Command {
      * Run logic
      * @param req  request
      * @param resp response
-     * @param url  path to redirect to page
+     *
      */
 
     String execute(HttpServletRequest req, HttpServletResponse resp);

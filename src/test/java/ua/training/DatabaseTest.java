@@ -126,7 +126,7 @@ public class DatabaseTest {
     @Test
     public void storageCheckWithProductsTest() {
         assertTrue(storageCheckWithProducts.findById(1000).getProducts().isEmpty());
-        assertEquals(storageCheckWithProducts.getTotalSum(), 0, 0.0);
+        assertEquals(storageCheckWithProducts.getTotalSum(), 0, 1000000.0);
         assertTrue(storageCheckWithProducts.delete(1000));
     }
 }
