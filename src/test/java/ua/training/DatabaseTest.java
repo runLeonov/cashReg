@@ -7,15 +7,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import ua.training.dao.daoimpl.*;
 import ua.training.dao.entity.*;
 
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
-import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DatabaseTest {
@@ -44,7 +36,7 @@ public class DatabaseTest {
 
         assertEquals(expectedUser, actualUser);
         assertNotNull("User is null", actualUser);
-        storageUser.delete(4);
+        storageUser.delete(expectedUser.getId());
     }
 
     @Test
@@ -99,7 +91,7 @@ public class DatabaseTest {
         assertEquals(expectedProduct, actualProduct);
 
         assertFalse("already exist", storageProduct.insert(expectedProduct));
-        assertTrue(storageProduct.delete(1001));
+        assertFalse(storageProduct.delete(expectedProduct.getId()));
 
         storageProduct.updatePrice(70.0, 2);
         assertEquals(expectedProduct, actualProduct);
@@ -115,6 +107,7 @@ public class DatabaseTest {
                 .build();
         assertNull(storageCheck.update(check));
         assertFalse(storageCheck.insert(check));
+        assertTrue(storageCheck.delete(1001));
         Check actualCheck = storageCheck.findById(1001);
         assertNotEquals(check, actualCheck);
 

@@ -1,31 +1,13 @@
 package ua.training;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.powermock.modules.junit4.PowerMockRunner;
-import ua.training.controller.MainController;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import ua.training.controller.commands.Command;
+import ua.training.controller.MainController;
 import ua.training.controller.commands.authorizationcommands.LoginCommand;
 import ua.training.controller.commands.authorizationcommands.LogoutCommand;
 import ua.training.controller.commands.authorizationcommands.RegistrationCommand;
@@ -45,13 +27,21 @@ import ua.training.dao.entity.User;
 import ua.training.dao.entity.UserRole;
 import ua.training.service.*;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+
 @RunWith(PowerMockRunner.class)
 public class ServletTest extends Mockito {
     MainController servlet = mock(MainController.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
     RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-
 
 
     @Test
