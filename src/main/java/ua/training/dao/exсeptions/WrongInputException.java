@@ -1,6 +1,6 @@
 package ua.training.dao.exсeptions;
 
-public class WrongInputException extends NumberFormatException {
+public class WrongInputException extends Exception {
     public WrongInputException() {
         super();
     }

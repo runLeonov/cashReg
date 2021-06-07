@@ -48,7 +48,7 @@ public class UpdateProductCommand implements Command {
                 }
                 logger.info("Product updated: " + id);
             }
-        } catch (WrongInputException e) {
+        } catch (NumberFormatException e) {
             req.setAttribute("wrongInputUpdate", true);
             logger.info("Wrong input!");
             return null;

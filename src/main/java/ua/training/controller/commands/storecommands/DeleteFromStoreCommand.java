@@ -38,7 +38,7 @@ public class DeleteFromStoreCommand implements Command {
                 productService.delete(id);
                 logger.info("Product deleted successfully: " + id);
             }
-        } catch (WrongInputException e) {
+        } catch (NumberFormatException e) {
             req.setAttribute("wrongInputDelete", true);
             logger.info("Wrong input!");
             return null;

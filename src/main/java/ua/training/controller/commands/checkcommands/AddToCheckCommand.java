@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import ua.training.controller.commands.Command;
 import ua.training.dao.entity.Product;
 import ua.training.dao.entity.ProductInCheckStore;
-import ua.training.dao.exсeptions.WrongInputException;
 import ua.training.service.ProductInCheckStoreService;
 import ua.training.service.ProductService;
 import ua.training.service.factory.ServiceFactory;
@@ -41,9 +40,9 @@ public class AddToCheckCommand implements Command {
 
         String prodIdStr = req.getParameter("prodId");
         String weightStr = req.getParameter("weight");
-        String prodName = String.valueOf(req.getParameter("prodName"));
+        String prodName = req.getParameter("prodName");
         try {
-            int prodId = 1;
+            int prodId;
             double weight = 1.0;
             prodId = Integer.parseInt(prodIdStr);
             weight = Double.parseDouble(weightStr);
@@ -74,9 +73,10 @@ public class AddToCheckCommand implements Command {
             } else {
                 req.setAttribute("notFound", true);
                 logger.info("Product with this id or name wasn't found");
+                return null;
             }
 
-        } catch (WrongInputException e) {
+        } catch (NumberFormatException e) {
             req.setAttribute("wrongInput", true);
             logger.info("Wrong input");
         }

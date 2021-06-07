@@ -48,7 +48,7 @@ public class AddToStoreCommand implements Command {
 
                 logger.info("Product added to store");
             }
-        } catch (WrongInputException e) {
+        } catch (NumberFormatException e) {
             req.setAttribute("wrongInputAdd", true);
             logger.info("Wrong input!");
             return null;
