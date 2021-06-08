@@ -6,9 +6,7 @@
 <c:if test="${not empty param.language}">
     <c:set var="language" value="${param.language}" scope="session"/>
 </c:if>
-<c:if test="${empty param.language}">
-    <c:set var="language" value="en" scope="session"/>
-</c:if>
+
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="lang"/>
 
