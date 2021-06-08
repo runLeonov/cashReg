@@ -1,6 +1,5 @@
 package ua.training.service;
 
-import org.apache.log4j.Logger;
 import ua.training.dao.daoimpl.CheckDAO;
 import ua.training.dao.daoimpl.CheckWithProductsDAO;
 import ua.training.dao.daoimpl.factory.DAOFactory;
